@@ -1,6 +1,6 @@
 package com.optimaize.langdetect.text;
 
-import com.google.common.collect.ImmutableList;
+import com.optimaize.langdetect.guava.collect.ImmutableList;
 import org.junit.Test;
 
 import java.util.Collections;

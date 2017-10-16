@@ -2,7 +2,7 @@ package com.optimaize.langdetect;
 
 import com.optimaize.langdetect.frma.LangProfileReader;
 import com.optimaize.langdetect.cybozu.util.LangProfile;
-import com.google.common.collect.ImmutableList;
+import com.optimaize.langdetect.guava.collect.ImmutableList;
 import com.optimaize.langdetect.ngram.NgramExtractors;
 import com.optimaize.langdetect.profiles.LanguageProfile;
 import com.optimaize.langdetect.profiles.OldLangProfileConverter;

@@ -1,6 +1,6 @@
 package com.optimaize.langdetect;
 
-import com.google.common.base.Optional;
+import com.optimaize.langdetect.guava.base.Optional;
 import com.optimaize.langdetect.i18n.LdLocale;
 
 import java.util.List;

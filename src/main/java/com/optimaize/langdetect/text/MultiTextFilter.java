@@ -1,9 +1,10 @@
 package com.optimaize.langdetect.text;
 
-import com.google.common.collect.ImmutableList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,13 +24,13 @@ public class MultiTextFilter implements TextFilter {
         if (filters.isEmpty()) {
             this.filters = null;
         } else {
-            this.filters = ImmutableList.copyOf(filters);
+            this.filters = Collections.unmodifiableList(new ArrayList<>(filters));
         }
     }
 
     @Override
     public String filter(CharSequence text) {
-        if (filters==null) {
+        if (filters == null) {
             return text.toString();
         } else {
             String modified = text.toString();

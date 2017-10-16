@@ -1,7 +1,5 @@
 package com.optimaize.langdetect.profiles;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.optimaize.langdetect.i18n.LdLocale;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,9 +45,9 @@ public final class LanguageProfileImpl implements LanguageProfile {
         public Stats(@NotNull Map<Integer, Long> numOccurrences,
                      @NotNull Map<Integer, Long> minGramCounts,
                      @NotNull Map<Integer, Long> maxGramCounts) {
-            this.numOccurrences = ImmutableMap.copyOf(numOccurrences);
-            this.minGramCounts  = ImmutableMap.copyOf(minGramCounts);
-            this.maxGramCounts  = ImmutableMap.copyOf(maxGramCounts);
+            this.numOccurrences = Collections.unmodifiableMap(new HashMap<>(numOccurrences));
+            this.minGramCounts  = Collections.unmodifiableMap(new HashMap<>(minGramCounts));
+            this.maxGramCounts  = Collections.unmodifiableMap(new HashMap<>(maxGramCounts));
         }
     }
 
@@ -60,7 +58,7 @@ public final class LanguageProfileImpl implements LanguageProfile {
     LanguageProfileImpl(@NotNull LdLocale locale,
                         @NotNull Map<Integer, Map<String, Integer>> ngrams) {
         this.locale = locale;
-        this.ngrams = ImmutableMap.copyOf(ngrams);
+        this.ngrams = Collections.unmodifiableMap(new HashMap<>(ngrams));
         this.stats  = makeStats(ngrams);
     }
 
@@ -152,14 +150,21 @@ public final class LanguageProfileImpl implements LanguageProfile {
 
     @NotNull @Override
     public Iterable<Map.Entry<String,Integer>> iterateGrams() {
+        List<Map.Entry<String,Integer>> iterables = new ArrayList<>();
         Iterable[] arr = new Iterable[ngrams.size()];
         int i=0;
         for (Map<String, Integer> stringIntegerMap : ngrams.values()) {
             arr[i] = stringIntegerMap.entrySet();
             i++;
+
+            for(Map.Entry<String,Integer> mapEntry : stringIntegerMap.entrySet()) {
+                iterables.add(mapEntry);
+            }
         }
+
+        return Collections.unmodifiableList(iterables);
         //noinspection unchecked
-        return Iterables.concat(arr);
+        //return Iterables.concat(arr);
     }
 
     @NotNull @Override

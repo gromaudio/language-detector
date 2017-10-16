@@ -1,7 +1,7 @@
 package com.optimaize.langdetect.i18n;
 
-import com.google.common.base.Optional;
-import com.google.common.base.Splitter;
+import com.optimaize.langdetect.guava.base.Optional;
+import com.optimaize.langdetect.guava.base.Splitter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

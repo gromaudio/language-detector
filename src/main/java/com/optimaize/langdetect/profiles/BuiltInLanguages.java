@@ -1,9 +1,9 @@
 package com.optimaize.langdetect.profiles;
 
-import com.google.common.collect.ImmutableList;
 import com.optimaize.langdetect.i18n.LdLocale;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -89,7 +89,7 @@ public class BuiltInLanguages {
         names.add(LdLocale.fromString("zh-CN"));
         names.add(LdLocale.fromString("zh-TW"));
 
-        languages = ImmutableList.copyOf(names);
+        languages = Collections.unmodifiableList(new ArrayList<LdLocale>(names));
     }
 
     static {
@@ -143,7 +143,7 @@ public class BuiltInLanguages {
         texts.add("zh-cn");
         texts.add("zh-tw");
 
-        shortTextLanguages = ImmutableList.copyOf(texts);
+        shortTextLanguages = Collections.unmodifiableList(new ArrayList<String>(texts));
     }
 
     /**
@@ -152,6 +152,7 @@ public class BuiltInLanguages {
     public static List<LdLocale> getLanguages() {
         return languages;
     }
+
     /**
      * @return immutable
      */

@@ -1,6 +1,5 @@
 package com.optimaize.langdetect;
 
-import com.google.common.collect.ImmutableSet;
 import com.optimaize.langdetect.i18n.LdLocale;
 import com.optimaize.langdetect.profiles.LanguageProfile;
 import com.optimaize.langdetect.profiles.LanguageProfileReader;

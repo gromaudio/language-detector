@@ -1,6 +1,6 @@
 package com.optimaize.langdetect.profiles;
 
-import com.google.common.collect.ImmutableList;
+import com.optimaize.langdetect.guava.collect.ImmutableList;
 import com.optimaize.langdetect.i18n.LdLocale;
 import org.junit.Test;
 

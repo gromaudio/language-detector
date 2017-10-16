@@ -1,6 +1,6 @@
 package com.optimaize.langdetect.ngram;
 
-import com.google.common.base.Stopwatch;
+import com.optimaize.langdetect.guava.base.Stopwatch;
 import org.junit.Test;
 
 import java.util.*;

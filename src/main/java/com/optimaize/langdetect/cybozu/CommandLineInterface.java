@@ -18,7 +18,7 @@ package com.optimaize.langdetect.cybozu;
 
 import com.optimaize.langdetect.frma.LangProfileWriter;
 import com.optimaize.langdetect.cybozu.util.LangProfile;
-import com.google.common.base.Optional;
+import com.optimaize.langdetect.guava.base.Optional;
 import com.optimaize.langdetect.DetectedLanguage;
 import com.optimaize.langdetect.LanguageDetector;
 import com.optimaize.langdetect.LanguageDetectorBuilder;
