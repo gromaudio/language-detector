@@ -7,10 +7,10 @@ import com.optimaize.langdetect.i18n.LdLocale;
 import com.optimaize.langdetect.ngram.NgramExtractor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +22,7 @@ import java.util.*;
  * @author Elmer Garduno
  */
 public final class LanguageDetectorImpl implements LanguageDetector {
-    private static final Logger logger = LoggerFactory.getLogger(LanguageDetectorImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(LanguageDetectorImpl.class.getName());
 
     /**
      * TODO document what this is for, and why that value is chosen.
@@ -168,7 +168,7 @@ public final class LanguageDetectorImpl implements LanguageDetector {
             if (Util.normalizeProb(prob) > CONV_THRESHOLD) break; //this break ensures that we quit the loop before all probabilities reach 0
         }
         Util.normalizeProb(prob);
-        if (logger.isDebugEnabled()) logger.debug("==> " + sortProbability(prob));
+        //LOGGER.log(Level.FINEST, "==> " + sortProbability(prob));
         return prob;
     }
 
@@ -189,11 +189,11 @@ public final class LanguageDetectorImpl implements LanguageDetector {
                 updateLangProb(prob, ngrams.get(r), 1, alpha);
                 if (i % 5 == 0) {
                     if (Util.normalizeProb(prob) > CONV_THRESHOLD) break; //this break ensures that we quit the loop before all probabilities reach 0
-                    if (logger.isTraceEnabled()) logger.trace("> " + sortProbability(prob));
+                    //LOGGER.log(Level.INFO, "> " + sortProbability(prob));
                 }
             }
             for(int j=0;j<langprob.length;++j) langprob[j] += prob[j] / N_TRIAL;
-            if (logger.isDebugEnabled()) logger.debug("==> " + sortProbability(prob));
+            //LOGGER.log(Level.INFO, "==> " + sortProbability(prob));
         }
         return langprob;
     }
@@ -225,7 +225,7 @@ public final class LanguageDetectorImpl implements LanguageDetector {
         if (langProbMap==null) {
             return false;
         }
-        if (logger.isTraceEnabled()) logger.trace(ngram + "(" + Util.unicodeEncode(ngram) + "):" + Util.wordProbToString(langProbMap, ngramFrequencyData.getLanguageList()));
+        //LOGGER.log(Level.INFO, ngram + "(" + Util.unicodeEncode(ngram) + "):" + Util.wordProbToString(langProbMap, ngramFrequencyData.getLanguageList()));
 
         double weight = alpha / BASE_FREQ;
         if (ngram.length() >1) {

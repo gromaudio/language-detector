@@ -18,13 +18,12 @@ package com.optimaize.langdetect.cybozu;
 
 import com.optimaize.langdetect.cybozu.util.TagExtractor;
 import com.optimaize.langdetect.cybozu.util.LangProfile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.*;
+import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -34,7 +33,7 @@ import java.util.zip.GZIPInputStream;
  */
 public class GenProfile {
 
-    private static final Logger logger = LoggerFactory.getLogger(GenProfile.class);
+    private static final Logger LOGGER = Logger.getLogger(GenProfile.class.getSimpleName());
 
     /**
      * Load Wikipedia abstract database file and generate its language profile
@@ -76,7 +75,7 @@ public class GenProfile {
                     if (reader != null) reader.close();
                 } catch (XMLStreamException e) { /* ignore exception */ }
             }
-            logger.info(lang + ":" + tagextractor.count());
+            //LOGGER.info(lang + ":" + tagextractor.count());
 
         } catch (IOException e) {
             throw new RuntimeException("Can't open training database file '" + file.getName() + "'", e);
