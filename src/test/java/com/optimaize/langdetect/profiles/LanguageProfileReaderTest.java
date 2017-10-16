@@ -1,11 +1,13 @@
 package com.optimaize.langdetect.profiles;
 
-import com.optimaize.langdetect.guava.collect.ImmutableList;
 import com.optimaize.langdetect.i18n.LdLocale;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -52,7 +54,7 @@ public class LanguageProfileReaderTest {
         assertThat(languageProfile, is(notNullValue()));
         assertThat(languageProfile.getLocale().getLanguage(), is(equalTo(language)));
         assertEquals(languageProfile.getGramLengths().size(), nWordSize);
-        assertEquals(languageProfile.getGramLengths(), ImmutableList.of(1, 2, 3));
+        assertEquals(languageProfile.getGramLengths(), Collections.unmodifiableList(new ArrayList<>(Arrays.asList(1, 2, 3))));
         assertEquals(languageProfile.getNumGrams(), freqSize);
 
         assertTrue(languageProfile.getMinGramCount(nWordSize) < languageProfile.getMaxGramCount(nWordSize));
@@ -63,7 +65,7 @@ public class LanguageProfileReaderTest {
 
     @Test
     public void readFromDir() throws IOException {
-        List<LanguageProfile> read = new LanguageProfileReader().read(ImmutableList.of("de", "fr"));
+        List<LanguageProfile> read = new LanguageProfileReader().read(Collections.unmodifiableList(new ArrayList<>(Arrays.asList("de", "fr"))));
         assertEquals(read.size(), 2);
     }
 
@@ -72,7 +74,7 @@ public class LanguageProfileReaderTest {
         List<LanguageProfile> read = new LanguageProfileReader().read(
                 LanguageProfileReaderTest.class.getClassLoader(),
                 "languages",
-                ImmutableList.of("de", "fr")
+                Collections.unmodifiableList(new ArrayList<>(Arrays.asList("de", "fr")))
         );
         assertEquals(read.size(), 2);
     }
@@ -80,19 +82,19 @@ public class LanguageProfileReaderTest {
 
     @Test
     public void read() throws IOException {
-        List<LanguageProfile> read = new LanguageProfileReader().read(ImmutableList.of("de", "fr"));
+        List<LanguageProfile> read = new LanguageProfileReader().read(Collections.unmodifiableList(new ArrayList<>(Arrays.asList("de", "fr"))));
         assertEquals(read.size(), 2);
     }
 
     @Test
     public void read_folder() throws IOException {
-        List<LanguageProfile> read = new LanguageProfileReader().read("languages", ImmutableList.of("de", "fr"));
+        List<LanguageProfile> read = new LanguageProfileReader().read("languages", Collections.unmodifiableList(new ArrayList<>(Arrays.asList("de", "fr"))));
         assertEquals(read.size(), 2);
     }
 
     @Test
     public void read_classpathAndFolder() throws IOException {
-        List<LanguageProfile> read = new LanguageProfileReader().read(LanguageProfileReaderTest.class.getClassLoader(), "languages", ImmutableList.of("de", "fr"));
+        List<LanguageProfile> read = new LanguageProfileReader().read(LanguageProfileReaderTest.class.getClassLoader(), "languages", Collections.unmodifiableList(new ArrayList<>(Arrays.asList("de", "fr"))));
         assertEquals(read.size(), 2);
     }
 
@@ -115,7 +117,7 @@ public class LanguageProfileReaderTest {
 
     @Test
     public void loadProfilesFromClasspath() throws IOException {
-        List<LanguageProfile> result = new LanguageProfileReader().read(this.getClass().getClassLoader(), "languages", ImmutableList.of("en", "fr", "nl", "de"));
+        List<LanguageProfile> result = new LanguageProfileReader().read(this.getClass().getClassLoader(), "languages", Collections.unmodifiableList(new ArrayList<>(Arrays.asList("en", "fr", "nl", "de"))));
         assertEquals(result.size(), 4);
     }
 

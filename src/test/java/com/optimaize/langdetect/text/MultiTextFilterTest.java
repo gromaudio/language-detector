@@ -1,8 +1,9 @@
 package com.optimaize.langdetect.text;
 
-import com.optimaize.langdetect.guava.collect.ImmutableList;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
@@ -19,18 +20,19 @@ public class MultiTextFilterTest {
 
     @Test
     public void doubleFilter() throws Exception {
-        assertEquals(new MultiTextFilter(ImmutableList.of(
-                new TextFilter() {
-                    @Override
-                    public String filter(CharSequence text) {
-                        return text.toString().replace("a", "A");
-                    }
-                }, new TextFilter() {
-                    @Override
-                    public String filter(CharSequence text) {
-                        return text.toString().replace("A", "B");
-                    }
-                }
-        )).filter("nananaa"), "nBnBnBB");
+        assertEquals(new MultiTextFilter(
+                Collections.unmodifiableList(new ArrayList<>(Arrays.asList(
+                        new TextFilter() {
+                            @Override
+                            public String filter(CharSequence text) {
+                                return text.toString().replace("a", "A");
+                            }
+                        }, new TextFilter() {
+                            @Override
+                            public String filter(CharSequence text) {
+                                return text.toString().replace("A", "B");
+                            }
+                        }
+                )))).filter("nananaa"), "nBnBnBB");
     }
 }

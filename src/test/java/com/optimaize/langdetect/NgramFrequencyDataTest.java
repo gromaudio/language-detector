@@ -7,6 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -27,7 +29,8 @@ public class NgramFrequencyDataTest {
     }
     private static NgramFrequencyData forAll(int gramSize) throws IOException {
         List<LanguageProfile> languageProfiles = new LanguageProfileReader().readAllBuiltIn();
-        return NgramFrequencyData.create(languageProfiles, ImmutableSet.of(gramSize));
+        return NgramFrequencyData.create(languageProfiles,
+                Collections.unmodifiableSet(new HashSet<Integer>(gramSize)));
     }
 
 
